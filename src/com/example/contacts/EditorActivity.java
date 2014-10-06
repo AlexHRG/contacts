@@ -1,9 +1,11 @@
 package com.example.contacts;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,10 +81,13 @@ public class EditorActivity extends ActionBarActivity implements OnClickListener
 			newValues.put(dbHelper.EMAIL_COLUMN, et_email.getText().toString());
 			newValues.put(dbHelper.BIRTHDATE_COLUMN, et_birthdate.getText().toString());
 			newValues.put(dbHelper.FACEBOOK_ID_COLUMN, et_facebook.getText().toString());
-			sdb.insert("contacts", null, newValues);
+			long rowId = sdb.insert("contacts", null, newValues);
 			
+			Log.d("MyLog", " --- rows inserted: " + rowId);
 			Toast.makeText(this, "Data added to db", Toast.LENGTH_SHORT).show();
-			finish();
+			
+			Intent intent = new Intent(this, MainActivity.class);
+			startActivity(intent);
 			break;
 		case R.id.buttonCancel:
 			finish();

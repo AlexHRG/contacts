@@ -1,5 +1,6 @@
 package com.example.contacts;
 
+import java.security.acl.LastOwnerException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +10,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
@@ -32,7 +34,7 @@ public class MainActivity extends ActionBarActivity {
 		sdb = dbHelper.getReadableDatabase();
 		
 		readDB();
-		createList();
+		//createList();
 	}
 
 	private void readDB(){
@@ -42,20 +44,31 @@ public class MainActivity extends ActionBarActivity {
 		if (cursor.moveToFirst()){
 			Map<String, String> contact_data = new HashMap<String, String>();
 			
+			int idIndex = cursor.getColumnIndex("_ID");
+			int firstNameIndex = cursor.getColumnIndex(dbHelper.FIRST_NAME_COLUMN);
+			//int lastNameIndex = cursor.getColumnIndex(dbHelper.LAST_NAME_COLUMN);
+			//int phoneIndex = cursor.getColumnIndex(dbHelper.PHONE_COLUMN);
+			
 			do{
-				String firstName = cursor.getString(cursor.getColumnIndex(dbHelper.FIRST_NAME_COLUMN));
-				//String lastName = cursor.getString(cursor.getColumnIndex(dbHelper.LAST_NAME_COLUMN));
-				contact_data.put("firstName", firstName);
+				String firstName = cursor.getString(firstNameIndex);
+				//String lastName = cursor.getString(lastNameIndex);
+				//String phone = cursor.getString(phoneIndex);
+				//contact_data.put("firstName", firstName);
 				//contact_data.put("lastName", lastName);
 				
-				contact_list.add(contact_data);
+				//contact_list.add(contact_data);
+				
+				Log.d("MyLog", " --- id = " + idIndex + "; first name = " + firstName  + " --- ");
 			} while (cursor.moveToNext());
+		} else {
+			Log.d("MyLog", " --- no entries --- ");
+			cursor.close();
 		}
 	}
 	
 	private void createList() {
 		adapter = new SimpleAdapter(MainActivity.this, contact_list,
-				R.layout.list, new String[] { "firstName" }, new int[] { R.id.listTitle });
+				R.layout.list, new String[] { "firstName" + " lastName" }, new int[] { R.id.listTitle });
 
 		listView.setAdapter(adapter);
 		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);

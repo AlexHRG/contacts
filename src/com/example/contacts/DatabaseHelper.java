@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
@@ -19,7 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 	public static final String FACEBOOK_ID_COLUMN = "facebook";
 	
 	private static final String DATABASE_CREATE_SCRIPT = "create table "
-			+ TABLE_CONTACTS + " (" + BaseColumns._ID
+			+ TABLE_CONTACTS + " (" + "_ID"
 			+ " integer primary key autoincrement, "
 			+ FIRST_NAME_COLUMN + " text not null, "
 			+ LAST_NAME_COLUMN + " text not null, "
@@ -51,6 +52,11 @@ public class DatabaseHelper extends SQLiteOpenHelper implements BaseColumns {
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	public void dropDB(SQLiteDatabase db){
+		db.execSQL("DROP TABLE IF EXISTS contacts;");
+		Log.d("MyLog", " --- DB dropped --- ");
 	}
 
 }
