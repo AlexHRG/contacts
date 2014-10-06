@@ -1,5 +1,7 @@
 package com.example.contacts;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -17,7 +19,10 @@ public class EditorActivity extends ActionBarActivity implements OnClickListener
 	private EditText et_phone_number;
 	private EditText et_email;
 	private EditText et_birthdate;
-	private EditText et_social;
+	private EditText et_facebook;
+	DatabaseHelper dbHelper;
+	SQLiteDatabase sdb;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,13 +34,17 @@ public class EditorActivity extends ActionBarActivity implements OnClickListener
 		et_phone_number = (EditText) findViewById(R.id.phoneNumber);
 		et_email = (EditText) findViewById(R.id.email);
 		et_birthdate = (EditText) findViewById(R.id.birthdate);
-		et_social = (EditText) findViewById(R.id.socialID);
+		et_facebook = (EditText) findViewById(R.id.facebookID);
 		
 		Button buttonAdd = (Button) findViewById(R.id.buttonAdd);
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		
 		buttonAdd.setOnClickListener(this);
 		buttonCancel.setOnClickListener(this);
+		
+		
+		dbHelper = new DatabaseHelper(this, "mydatabase.db", null, 1);
+		sdb = dbHelper.getWritableDatabase();
 	}
 
 	@Override
@@ -43,6 +52,7 @@ public class EditorActivity extends ActionBarActivity implements OnClickListener
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.editor, menu);
 		return true;
+
 	}
 
 	@Override
@@ -60,15 +70,19 @@ public class EditorActivity extends ActionBarActivity implements OnClickListener
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()){
-		case R.id.buttonAdd:
-			String first_name = et_first_name.getText().toString();
-			String last_name = et_last_name.getText().toString();
-			String phone_number = et_phone_number.getText().toString();
-			String email = et_email.getText().toString();
-			String birthdate = et_birthdate.getText().toString();
-			String social = et_social.getText().toString();
+		case R.id.buttonAdd:			
+			ContentValues newValues = new ContentValues();
 			
-			Toast.makeText(this, "FirstName = " + first_name, Toast.LENGTH_SHORT).show();
+			newValues.put(dbHelper.FIRST_NAME_COLUMN, et_first_name.getText().toString());
+			newValues.put(dbHelper.LAST_NAME_COLUMN, et_last_name.getText().toString());
+			newValues.put(dbHelper.PHONE_COLUMN, et_phone_number.getText().toString());
+			newValues.put(dbHelper.EMAIL_COLUMN, et_email.getText().toString());
+			newValues.put(dbHelper.BIRTHDATE_COLUMN, et_birthdate.getText().toString());
+			newValues.put(dbHelper.FACEBOOK_ID_COLUMN, et_facebook.getText().toString());
+			sdb.insert("contacts", null, newValues);
+			
+			Toast.makeText(this, "Data added to db", Toast.LENGTH_SHORT).show();
+			finish();
 			break;
 		case R.id.buttonCancel:
 			finish();
