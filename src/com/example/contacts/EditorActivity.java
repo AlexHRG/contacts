@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class EditorActivity extends ActionBarActivity implements
 		OnClickListener {
@@ -53,20 +52,20 @@ public class EditorActivity extends ActionBarActivity implements
         row_id = intent.getLongExtra("row_id", 0);
 		if (row_id != 0) {
 			row_no = String.valueOf(row_id);
-			readData(row_id);
 			edit_mode = true;
+			readData(row_id);
 		}
 	}
 
 	private void readData(Long row_id) {
 		cursor = db.getLine(row_no);
 		if (cursor.moveToFirst()){
-			int fn_index = cursor.getColumnIndex(db.COLUMN_FN);
-			int ln_index = cursor.getColumnIndex(db.COLUMN_LN);
-			int phone_index = cursor.getColumnIndex(db.COLUMN_PHONE);
-			int email_index = cursor.getColumnIndex(db.COLUMN_EMAIL);
-			int birth_index = cursor.getColumnIndex(db.COLUMN_BIRTH);
-			int social_index = cursor.getColumnIndex(db.COLUMN_SN);
+			int fn_index = cursor.getColumnIndex(DB.COLUMN_FN);
+			int ln_index = cursor.getColumnIndex(DB.COLUMN_LN);
+			int phone_index = cursor.getColumnIndex(DB.COLUMN_PHONE);
+			int email_index = cursor.getColumnIndex(DB.COLUMN_EMAIL);
+			int birth_index = cursor.getColumnIndex(DB.COLUMN_BIRTH);
+			int social_index = cursor.getColumnIndex(DB.COLUMN_SN);
 	
 			et_first_name.setText(cursor.getString(fn_index));
 			et_last_name.setText(cursor.getString(ln_index));
