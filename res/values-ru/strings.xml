@@ -15,5 +15,9 @@
     <string name="add_contact">Добавить контакт</string>
     <string name="cancel">Отмена</string>
     <string name="title_activity_editor">Экран редактирования</string>
+    <string name="delete">Удалить</string>
+    <string name="edit">Правка</string>
+    <string name="save">Сохранить</string>
+    <string name="exit">Выход</string>
 
 </resources>
