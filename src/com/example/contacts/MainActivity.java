@@ -21,8 +21,7 @@ public class MainActivity extends ActionBarActivity {
 	private ListView listView;
 	private SimpleAdapter adapter;
 	private ArrayList<Map<String, String>> contact_list = new ArrayList<Map<String, String>>();
-	DatabaseHelper dbHelper;
-	SQLiteDatabase sdb;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,49 +29,9 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		listView = (ListView) findViewById(android.R.id.list);
-		dbHelper = new DatabaseHelper(this, "mydatabase.db", null, 1);
-		sdb = dbHelper.getReadableDatabase();
-		
-		readDB();
-		//createList();
+
 	}
 
-	private void readDB(){
-		Cursor cursor = sdb.query("contacts", new String[] {dbHelper.FIRST_NAME_COLUMN}, 
-			    null, null, 
-			    null, null, null);
-		if (cursor.moveToFirst()){
-			Map<String, String> contact_data = new HashMap<String, String>();
-			
-			int idIndex = cursor.getColumnIndex("_ID");
-			int firstNameIndex = cursor.getColumnIndex(dbHelper.FIRST_NAME_COLUMN);
-			//int lastNameIndex = cursor.getColumnIndex(dbHelper.LAST_NAME_COLUMN);
-			//int phoneIndex = cursor.getColumnIndex(dbHelper.PHONE_COLUMN);
-			
-			do{
-				String firstName = cursor.getString(firstNameIndex);
-				//String lastName = cursor.getString(lastNameIndex);
-				//String phone = cursor.getString(phoneIndex);
-				//contact_data.put("firstName", firstName);
-				//contact_data.put("lastName", lastName);
-				
-				//contact_list.add(contact_data);
-				
-				Log.d("MyLog", " --- id = " + idIndex + "; first name = " + firstName  + " --- ");
-			} while (cursor.moveToNext());
-		} else {
-			Log.d("MyLog", " --- no entries --- ");
-			cursor.close();
-		}
-	}
-	
-	private void createList() {
-		adapter = new SimpleAdapter(MainActivity.this, contact_list,
-				R.layout.list, new String[] { "firstName" + " lastName" }, new int[] { R.id.listTitle });
-
-		listView.setAdapter(adapter);
-		listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.

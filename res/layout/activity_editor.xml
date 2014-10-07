@@ -45,7 +45,7 @@
         android:text="@string/birth_date" />
 
     <EditText
-        android:id="@+id/facebookID"
+        android:id="@+id/social_net_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
