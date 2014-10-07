@@ -1108,6 +1108,7 @@ containing a value of this type.
         public static final int edit_query=0x7f050030;
         public static final int email=0x7f05003f;
         public static final int end=0x7f050013;
+        public static final int exit=0x7f05004a;
         public static final int expand_activities_button=0x7f050026;
         public static final int expanded_menu=0x7f05002c;
         public static final int firstName=0x7f05003c;
@@ -1263,6 +1264,7 @@ containing a value of this type.
         public static final int delete=0x7f0a001b;
         public static final int edit=0x7f0a001c;
         public static final int email=0x7f0a0013;
+        public static final int exit=0x7f0a001e;
         public static final int facebook_id=0x7f0a0015;
         public static final int first_name=0x7f0a0010;
         public static final int foto=0x7f0a0016;

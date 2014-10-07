@@ -18,6 +18,7 @@
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
     <string name="save">Save</string>
+    <string name="exit">Exit</string>
     
 
 </resources>
