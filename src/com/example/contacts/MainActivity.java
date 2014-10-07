@@ -1,13 +1,7 @@
 package com.example.contacts;
 
-import java.security.acl.LastOwnerException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -15,12 +9,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 	private ListView listView;
 	private SimpleAdapter adapter;
-	private ArrayList<Map<String, String>> contact_list = new ArrayList<Map<String, String>>();
+	private DB db;
+	SimpleCursorAdapter scAdapter;
+	Cursor cursor;
 
 
 	@Override
@@ -28,7 +25,18 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		db = new DB(this);
+		db.open();
+		
 		listView = (ListView) findViewById(android.R.id.list);
+		
+	    cursor = db.getAllData();
+	    startManagingCursor(cursor);
+	    
+	    String[] from = new String[] { DB.COLUMN_FN, DB.COLUMN_LN };
+	    int[] to = new int[] { R.id.listFN, R.id.listLN };
+	    scAdapter = new SimpleCursorAdapter(this, R.layout.list, cursor, from, to);
+        listView.setAdapter(scAdapter);
 
 	}
 
@@ -51,4 +59,9 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+	  protected void onDestroy() {
+		    super.onDestroy();
+		    db.close();
+		  }
 }
