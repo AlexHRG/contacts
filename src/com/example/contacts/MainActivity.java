@@ -5,8 +5,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.SimpleCursorAdapter;
@@ -14,44 +18,43 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 	private ListView listView;
-	private SimpleAdapter adapter;
 	private DB db;
-	SimpleCursorAdapter scAdapter;
-	Cursor cursor;
+	private SimpleCursorAdapter scAdapter;
+	private Cursor cursor;
+	private static final int CM_DELETE_ID = 1;
+	private static final int CM_EDIT_ID = 2;
 
-
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		db = new DB(this);
 		db.open();
-		
+
 		listView = (ListView) findViewById(android.R.id.list);
-		
-	    cursor = db.getAllData();
-	    startManagingCursor(cursor);
-	    
-	    String[] from = new String[] { DB.COLUMN_FN, DB.COLUMN_LN };
-	    int[] to = new int[] { R.id.listFN, R.id.listLN };
-	    scAdapter = new SimpleCursorAdapter(this, R.layout.list, cursor, from, to);
-        listView.setAdapter(scAdapter);
+
+		cursor = db.getAllData();
+		startManagingCursor(cursor);
+
+		String[] from = new String[] { DB.COLUMN_FN, DB.COLUMN_LN };
+		int[] to = new int[] { R.id.listFN, R.id.listLN };
+		scAdapter = new SimpleCursorAdapter(this, R.layout.list, cursor, from,
+				to);
+		listView.setAdapter(scAdapter);
+		registerForContextMenu(listView);
 
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.add_contact) {
 			Intent intent = new Intent(this, EditorActivity.class);
@@ -59,9 +62,34 @@ public class MainActivity extends ActionBarActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
-	  protected void onDestroy() {
-		    super.onDestroy();
-		    db.close();
-		  }
+
+	public void onCreateContextMenu(ContextMenu menu, View v,
+			ContextMenuInfo menuInfo) {
+		super.onCreateContextMenu(menu, v, menuInfo);
+		menu.add(0, CM_EDIT_ID, 0, R.string.edit);
+		menu.add(0, CM_DELETE_ID, 0, R.string.delete);
+	}
+
+	public boolean onContextItemSelected(MenuItem item) {
+		if (item.getItemId() == CM_DELETE_ID) {
+			AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item
+					.getMenuInfo();
+			db.delRec(acmi.id);
+			cursor.requery();
+			return true;
+		} else if (item.getItemId() == CM_EDIT_ID){
+			AdapterContextMenuInfo acmi = (AdapterContextMenuInfo) item
+					.getMenuInfo();
+			Intent intent = new Intent(this, EditorActivity.class);
+			intent.putExtra("row_id", acmi.id);
+			
+			startActivity(intent);
+		}
+		return super.onContextItemSelected(item);
+	}
+
+	protected void onDestroy() {
+		super.onDestroy();
+		db.close();
+	}
 }

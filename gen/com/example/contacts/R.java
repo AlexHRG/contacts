@@ -1097,8 +1097,8 @@ containing a value of this type.
         public static final int always=0x7f05000b;
         public static final int beginning=0x7f050011;
         public static final int birthdate=0x7f050040;
-        public static final int buttonAdd=0x7f050042;
         public static final int buttonCancel=0x7f050043;
+        public static final int buttonSave=0x7f050042;
         public static final int checkbox=0x7f05002d;
         public static final int collapseActionView=0x7f05000d;
         public static final int default_activity_button=0x7f050028;
@@ -1260,6 +1260,8 @@ containing a value of this type.
         public static final int app_name=0x7f0a000d;
         public static final int birth_date=0x7f0a0014;
         public static final int cancel=0x7f0a0019;
+        public static final int delete=0x7f0a001b;
+        public static final int edit=0x7f0a001c;
         public static final int email=0x7f0a0013;
         public static final int facebook_id=0x7f0a0015;
         public static final int first_name=0x7f0a0010;
@@ -1268,6 +1270,7 @@ containing a value of this type.
         public static final int hello_world=0x7f0a000e;
         public static final int last_name=0x7f0a0011;
         public static final int mob_phone=0x7f0a0012;
+        public static final int save=0x7f0a001d;
         public static final int title_activity_editor=0x7f0a001a;
     }
     public static final class style {

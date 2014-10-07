@@ -252,8 +252,8 @@ int id add_contact 0x7f050049
 int id always 0x7f05000b
 int id beginning 0x7f050011
 int id birthdate 0x7f050040
-int id buttonAdd 0x7f050042
 int id buttonCancel 0x7f050043
+int id buttonSave 0x7f050042
 int id checkbox 0x7f05002d
 int id collapseActionView 0x7f05000d
 int id default_activity_button 0x7f050028
@@ -358,6 +358,8 @@ int string add_contact 0x7f0a0018
 int string app_name 0x7f0a000d
 int string birth_date 0x7f0a0014
 int string cancel 0x7f0a0019
+int string delete 0x7f0a001b
+int string edit 0x7f0a001c
 int string email 0x7f0a0013
 int string facebook_id 0x7f0a0015
 int string first_name 0x7f0a0010
@@ -366,6 +368,7 @@ int string group 0x7f0a0017
 int string hello_world 0x7f0a000e
 int string last_name 0x7f0a0011
 int string mob_phone 0x7f0a0012
+int string save 0x7f0a001d
 int string title_activity_editor 0x7f0a001a
 int style AppBaseTheme 0x7f0b008b
 int style AppTheme 0x7f0b008c

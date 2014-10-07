@@ -52,10 +52,10 @@
         android:text="@string/facebook_id" />
 
     <Button
-        android:id="@+id/buttonAdd"
+        android:id="@+id/buttonSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_contact" />
+        android:text="@string/save" />
 
     <Button
         android:id="@+id/buttonCancel"

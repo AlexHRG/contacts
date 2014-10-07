@@ -57,6 +57,10 @@ public class DB {
     return mDB.query(DB_TABLE, null, null, null, null, null, null);
   }
   
+  public Cursor getLine(String row_no){
+	return mDB.rawQuery("SELECT * FROM 'contacts' WHERE _id = ?", new String[] {row_no});
+  }
+  
   // добавить запись в DB_TABLE
   public void addRec(String fn, String ln, String phone, String email, 
 		  String birthdate, String social) {
@@ -68,6 +72,19 @@ public class DB {
     cv.put(COLUMN_BIRTH, birthdate);
     cv.put(COLUMN_SN, social);
     mDB.insert(DB_TABLE, null, cv);
+  }  
+  
+  public void updRec(String fn, String ln, String phone, String email, 
+		  String birthdate, String social, String row_id) {
+    ContentValues cv = new ContentValues();
+    cv.put(COLUMN_FN, fn);
+    cv.put(COLUMN_LN, ln);
+    cv.put(COLUMN_PHONE, phone);
+    cv.put(COLUMN_EMAIL, email);
+    cv.put(COLUMN_BIRTH, birthdate);
+    cv.put(COLUMN_SN, social);
+    mDB.update(DB_TABLE, cv,"_id = ?",
+            new String[] { row_id });
   }
   
   // удалить запись из DB_TABLE
