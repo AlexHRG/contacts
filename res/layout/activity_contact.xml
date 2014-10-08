@@ -1,90 +1,99 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:gravity="center_horizontal" >
 
-    <TextView
-        android:id="@+id/title_name"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/first_name"
-        android:textSize="18sp" />
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/field_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/first_name"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/title_lname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/last_name"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/field_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/field_lname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_lname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/last_name"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/title_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/mob_phone"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/field_lname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/field_phone"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/mob_phone"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/title_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/email"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/field_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/field_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/title_birthdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/birth_date"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/field_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/field_birthdate"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_birthdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/birth_date"
+            android:textSize="18sp" />
 
-    <TextView
-        android:id="@+id/title_social"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/facebook_id"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/field_birthdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
 
-    <TextView
-        android:id="@+id/field_social"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
-        android:textSize="25sp" />
+        <TextView
+            android:id="@+id/title_social"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/facebook_id"
+            android:textSize="18sp" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/field_social"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</ScrollView>
