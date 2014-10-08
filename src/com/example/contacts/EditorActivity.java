@@ -1,5 +1,8 @@
 package com.example.contacts;
 
+import java.util.logging.Logger;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +14,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class EditorActivity extends ActionBarActivity implements
 		OnClickListener {
@@ -21,10 +26,13 @@ public class EditorActivity extends ActionBarActivity implements
 	private EditText et_email;
 	private EditText et_birthdate;
 	private EditText et_social_network;
+	private TextView file_path;
 	private DB db;
 	private long row_id;
 	private boolean edit_mode = false;
 	private Cursor cursor;
+	private final int REQUEST_SAVE = 1;
+	private final int REQUEST_LOAD = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,12 +48,16 @@ public class EditorActivity extends ActionBarActivity implements
 		et_email = (EditText) findViewById(R.id.email);
 		et_birthdate = (EditText) findViewById(R.id.birthdate);
 		et_social_network = (EditText) findViewById(R.id.social_net_id);
+		file_path = (TextView) findViewById(R.id.file_path);
+		
 
 		Button buttonAdd = (Button) findViewById(R.id.buttonSave);
 		Button buttonCancel = (Button) findViewById(R.id.buttonCancel);
+		Button buttonOpen = (Button) findViewById(R.id.buttonChoosePicture);
 
 		buttonAdd.setOnClickListener(this);
 		buttonCancel.setOnClickListener(this);
+		buttonOpen.setOnClickListener(this);
 
 		Intent intent = getIntent();
         row_id = intent.getLongExtra("row_id", 0);
@@ -93,6 +105,16 @@ public class EditorActivity extends ActionBarActivity implements
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		case R.id.buttonChoosePicture:
+			Intent intent = new Intent(this, FileDialog.class);
+            intent.putExtra(FileDialog.START_PATH, "/sdcard");
+            //can user select directories or not
+            intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
+            //alternatively you can set file filter
+            //intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "png" });
+            startActivityForResult(intent, REQUEST_SAVE);
+
+			break;
 		case R.id.buttonSave:
 			if (!edit_mode) {
 				db.addRec(et_first_name.getText().toString()
@@ -121,6 +143,23 @@ public class EditorActivity extends ActionBarActivity implements
 		}
 	}
 
+    public synchronized void onActivityResult(final int requestCode,
+            int resultCode, final Intent data) {
+
+            if (resultCode == Activity.RESULT_OK) {
+                    if (requestCode == REQUEST_SAVE) {
+                            System.out.println("Saving...");
+                    } else if (requestCode == REQUEST_LOAD) {
+                            System.out.println("Loading...");
+                    }
+                    String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
+                    file_path.setText(filePath);
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+            		return;
+            }
+
+    }
+	
 	private void toMainActivity() {
 		Intent intent = new Intent(this, MainActivity.class);
 		startActivity(intent);
