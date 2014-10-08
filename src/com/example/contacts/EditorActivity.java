@@ -51,14 +51,13 @@ public class EditorActivity extends ActionBarActivity implements
 		Intent intent = getIntent();
         row_id = intent.getLongExtra("row_id", 0);
 		if (row_id != 0) {
-			row_no = String.valueOf(row_id);
 			edit_mode = true;
 			readData(row_id);
 		}
 	}
 
 	private void readData(Long row_id) {
-		cursor = db.getLine(row_no);
+		cursor = db.getLine(String.valueOf(row_id));
 		if (cursor.moveToFirst()){
 			int fn_index = cursor.getColumnIndex(DB.COLUMN_FN);
 			int ln_index = cursor.getColumnIndex(DB.COLUMN_LN);

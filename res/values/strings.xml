@@ -19,6 +19,6 @@
     <string name="edit">Edit</string>
     <string name="save">Save</string>
     <string name="exit">Exit</string>
-    
+    <string name="title_activity_contact">ContactActivity</string>
 
 </resources>

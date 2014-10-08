@@ -1,5 +1,7 @@
 package com.example.contacts;
 
+import java.util.Map;
+
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -11,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Toast;
@@ -43,6 +46,22 @@ public class MainActivity extends ActionBarActivity {
 				to);
 		listView.setAdapter(scAdapter);
 		registerForContextMenu(listView);
+		
+		listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+			@SuppressWarnings("unchecked")
+			@Override
+			public void onItemClick(AdapterView<?> parent, View itemClicked,
+					int position, long id) {
+				Intent intent = new Intent(MainActivity.this,
+						ContactActivity.class);
+				intent.putExtra("row_id", id);				
+
+				startActivity(intent);
+
+			}
+
+		});
 
 	}
 
