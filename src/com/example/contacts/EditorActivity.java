@@ -116,32 +116,20 @@ public class EditorActivity extends ActionBarActivity implements
             //alternatively you can set file filter
             //intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "png" });
             startActivityForResult(intent, REQUEST_SAVE);
-
 			break;
 		case R.id.buttonSave:
-			if (!edit_mode) {
-				db.addRec(et_first_name.getText().toString()
-						, et_last_name.getText().toString()
-						, et_phone_number.getText().toString()
-						, et_email.getText().toString()
-						, et_birthdate.getText().toString()
-						, et_social_network.getText().toString()
-						, imagePath
-						, 0);
-				toMainActivity();
-				break;
-			} else {
-				db.updRec(et_first_name.getText().toString()
-						, et_last_name.getText().toString()
-						, et_phone_number.getText().toString()
-						, et_email.getText().toString()
-						, et_birthdate.getText().toString()
-						, et_social_network.getText().toString()
-						, imagePath
-						, 0
-						, row_id);
-				toMainActivity();
-			}
+			db.addOrUpd(edit_mode
+					, et_first_name.getText().toString()
+					, et_last_name.getText().toString()
+					, et_phone_number.getText().toString()
+					, et_email.getText().toString()
+					, et_birthdate.getText().toString()
+					, et_social_network.getText().toString()
+					, imagePath
+					, 0
+					, row_id);
+			toMainActivity();
+			break;
 		case R.id.buttonCancel:
 			finish();
 			break;

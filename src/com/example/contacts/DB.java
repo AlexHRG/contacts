@@ -57,21 +57,7 @@ public class DB {
 				new String[] { String.valueOf(row_id) });
 	}
 
-	public void addRec(String fn, String ln, String phone, String email,
-			String birthdate, String social, String imagePath, long imageID) {
-		ContentValues cv = new ContentValues();
-		cv.put(COLUMN_FN, fn);
-		cv.put(COLUMN_LN, ln);
-		cv.put(COLUMN_PHONE, phone);
-		cv.put(COLUMN_EMAIL, email);
-		cv.put(COLUMN_BIRTH, birthdate);
-		cv.put(COLUMN_SN, social);
-		cv.put(COLUMN_IMAGE_PATH, imagePath);
-		cv.put(COLUMN_IMAGE_ID, imageID);
-		mDB.insert(DB_TABLE, null, cv);
-	}
-
-	public void updRec(String fn, String ln, String phone, String email,
+	public void addOrUpd(Boolean update, String fn, String ln, String phone, String email,
 			String birthdate, String social, String imagePath, long imageID, long row_id) {
 		ContentValues cv = new ContentValues();
 		cv.put(COLUMN_FN, fn);
@@ -82,8 +68,11 @@ public class DB {
 		cv.put(COLUMN_SN, social);
 		cv.put(COLUMN_IMAGE_PATH, imagePath);
 		cv.put(COLUMN_IMAGE_ID, imageID);
-		mDB.update(DB_TABLE, cv, "_id = ?",
-				new String[] { String.valueOf(row_id) });
+		if (update){
+			mDB.update(DB_TABLE, cv, "_id = ?",	new String[] { String.valueOf(row_id) });
+		} else {
+			mDB.insert(DB_TABLE, null, cv);
+		}
 	}
 
 	public void delRec(long id) {
