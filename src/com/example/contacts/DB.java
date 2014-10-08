@@ -53,8 +53,8 @@ public class DB {
     return mDB.query(DB_TABLE, null, null, null, null, null, null);
   }
   
-  public Cursor getLine(String row_no){
-	return mDB.rawQuery("SELECT * FROM 'contacts' WHERE _id = ?", new String[] {row_no});
+  public Cursor getLine(long row_id){
+	return mDB.rawQuery("SELECT * FROM 'contacts' WHERE _id = ?", new String[] {String.valueOf(row_id)});
   }
   
   public void addRec(String fn, String ln, String phone, String email, 
@@ -70,7 +70,7 @@ public class DB {
   }  
   
   public void updRec(String fn, String ln, String phone, String email, 
-		  String birthdate, String social, String row_id) {
+		  String birthdate, String social, long row_id) {
     ContentValues cv = new ContentValues();
     cv.put(COLUMN_FN, fn);
     cv.put(COLUMN_LN, ln);
@@ -79,7 +79,7 @@ public class DB {
     cv.put(COLUMN_BIRTH, birthdate);
     cv.put(COLUMN_SN, social);
     mDB.update(DB_TABLE, cv,"_id = ?",
-            new String[] { row_id });
+            new String[] { String.valueOf(row_id) });
   }
   
   public void delRec(long id) {

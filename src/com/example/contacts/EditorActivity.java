@@ -23,7 +23,6 @@ public class EditorActivity extends ActionBarActivity implements
 	private EditText et_social_network;
 	private DB db;
 	private long row_id;
-	private String row_no;
 	private boolean edit_mode = false;
 	private Cursor cursor;
 
@@ -57,7 +56,7 @@ public class EditorActivity extends ActionBarActivity implements
 	}
 
 	private void readData(Long row_id) {
-		cursor = db.getLine(String.valueOf(row_id));
+		cursor = db.getLine(row_id);
 		if (cursor.moveToFirst()){
 			int fn_index = cursor.getColumnIndex(DB.COLUMN_FN);
 			int ln_index = cursor.getColumnIndex(DB.COLUMN_LN);
@@ -111,7 +110,7 @@ public class EditorActivity extends ActionBarActivity implements
 						, et_email.getText().toString()
 						, et_birthdate.getText().toString()
 						, et_social_network.getText().toString()
-						, row_no);
+						, row_id);
 				toMainActivity();
 			}
 		case R.id.buttonCancel:

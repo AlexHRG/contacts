@@ -42,8 +42,7 @@ public class ContactActivity extends ActionBarActivity {
 	}
 	
 	private void readData(){
-		Log.d("myTag", "row_id = " + row_id);
-		cursor = db.getLine(String.valueOf(row_id));
+		cursor = db.getLine(row_id);
 		if (cursor.moveToFirst()){
 			int fn_index = cursor.getColumnIndex(DB.COLUMN_FN);
 			int ln_index = cursor.getColumnIndex(DB.COLUMN_LN);
@@ -74,8 +73,11 @@ public class ContactActivity extends ActionBarActivity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
+		if (id == R.id.action_edit) {
+			Intent intent = new Intent(this, EditorActivity.class);
+			intent.putExtra("row_id", row_id);
+			
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
