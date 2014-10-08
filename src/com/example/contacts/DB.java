@@ -19,12 +19,15 @@ public class DB {
 	public static final String COLUMN_EMAIL = "email";
 	public static final String COLUMN_BIRTH = "birthdate";
 	public static final String COLUMN_SN = "socialNetworkId";
+	public static final String COLUMN_IMAGE_PATH = "imagePath";
+	public static final String COLUMN_IMAGE_ID = "inageId";
 
 	private static final String DB_CREATE = "create table " + DB_TABLE + "("
 			+ COLUMN_ID + " integer primary key autoincrement, " + COLUMN_FN
 			+ " text not null, " + COLUMN_LN + " text not null, "
 			+ COLUMN_PHONE + " text, " + COLUMN_EMAIL + " text, "
-			+ COLUMN_BIRTH + " text, " + COLUMN_SN + " text);";
+			+ COLUMN_BIRTH + " text, " + COLUMN_SN + " text, "
+			+ COLUMN_IMAGE_PATH + " text, " + COLUMN_IMAGE_ID + " integer);";
 
 	private final Context mCtx;
 
@@ -55,7 +58,7 @@ public class DB {
 	}
 
 	public void addRec(String fn, String ln, String phone, String email,
-			String birthdate, String social) {
+			String birthdate, String social, String imagePath, long imageID) {
 		ContentValues cv = new ContentValues();
 		cv.put(COLUMN_FN, fn);
 		cv.put(COLUMN_LN, ln);
@@ -63,11 +66,13 @@ public class DB {
 		cv.put(COLUMN_EMAIL, email);
 		cv.put(COLUMN_BIRTH, birthdate);
 		cv.put(COLUMN_SN, social);
+		cv.put(COLUMN_IMAGE_PATH, imagePath);
+		cv.put(COLUMN_IMAGE_ID, imageID);
 		mDB.insert(DB_TABLE, null, cv);
 	}
 
 	public void updRec(String fn, String ln, String phone, String email,
-			String birthdate, String social, long row_id) {
+			String birthdate, String social, String imagePath, long imageID, long row_id) {
 		ContentValues cv = new ContentValues();
 		cv.put(COLUMN_FN, fn);
 		cv.put(COLUMN_LN, ln);
@@ -75,6 +80,8 @@ public class DB {
 		cv.put(COLUMN_EMAIL, email);
 		cv.put(COLUMN_BIRTH, birthdate);
 		cv.put(COLUMN_SN, social);
+		cv.put(COLUMN_IMAGE_PATH, imagePath);
+		cv.put(COLUMN_IMAGE_ID, imageID);
 		mDB.update(DB_TABLE, cv, "_id = ?",
 				new String[] { String.valueOf(row_id) });
 	}

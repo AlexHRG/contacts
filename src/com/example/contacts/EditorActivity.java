@@ -26,7 +26,8 @@ public class EditorActivity extends ActionBarActivity implements
 	private EditText et_email;
 	private EditText et_birthdate;
 	private EditText et_social_network;
-	private TextView file_path;
+	private TextView tv_image_path;
+	private String imagePath;
 	private DB db;
 	private long row_id;
 	private boolean edit_mode = false;
@@ -48,7 +49,7 @@ public class EditorActivity extends ActionBarActivity implements
 		et_email = (EditText) findViewById(R.id.email);
 		et_birthdate = (EditText) findViewById(R.id.birthdate);
 		et_social_network = (EditText) findViewById(R.id.social_net_id);
-		file_path = (TextView) findViewById(R.id.file_path);
+		tv_image_path = (TextView) findViewById(R.id.file_path);
 		
 
 		Button buttonAdd = (Button) findViewById(R.id.buttonSave);
@@ -76,6 +77,7 @@ public class EditorActivity extends ActionBarActivity implements
 			int email_index = cursor.getColumnIndex(DB.COLUMN_EMAIL);
 			int birth_index = cursor.getColumnIndex(DB.COLUMN_BIRTH);
 			int social_index = cursor.getColumnIndex(DB.COLUMN_SN);
+			int image_path_index = cursor.getColumnIndex(DB.COLUMN_IMAGE_PATH);
 	
 			et_first_name.setText(cursor.getString(fn_index));
 			et_last_name.setText(cursor.getString(ln_index));
@@ -83,6 +85,7 @@ public class EditorActivity extends ActionBarActivity implements
 			et_email.setText(cursor.getString(email_index));
 			et_birthdate.setText(cursor.getString(birth_index));
 			et_social_network.setText(cursor.getString(social_index));
+			tv_image_path.setText(cursor.getString(image_path_index));
 		}
 	}
 
@@ -122,7 +125,9 @@ public class EditorActivity extends ActionBarActivity implements
 						, et_phone_number.getText().toString()
 						, et_email.getText().toString()
 						, et_birthdate.getText().toString()
-						, et_social_network.getText().toString());
+						, et_social_network.getText().toString()
+						, imagePath
+						, 0);
 				toMainActivity();
 				break;
 			} else {
@@ -132,6 +137,8 @@ public class EditorActivity extends ActionBarActivity implements
 						, et_email.getText().toString()
 						, et_birthdate.getText().toString()
 						, et_social_network.getText().toString()
+						, imagePath
+						, 0
 						, row_id);
 				toMainActivity();
 			}
@@ -152,8 +159,8 @@ public class EditorActivity extends ActionBarActivity implements
                     } else if (requestCode == REQUEST_LOAD) {
                             System.out.println("Loading...");
                     }
-                    String filePath = data.getStringExtra(FileDialog.RESULT_PATH);
-                    file_path.setText(filePath);
+                    imagePath = data.getStringExtra(FileDialog.RESULT_PATH);
+                    tv_image_path.setText(imagePath);
             } else if (resultCode == Activity.RESULT_CANCELED) {
             		return;
             }
