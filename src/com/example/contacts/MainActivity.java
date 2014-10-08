@@ -58,8 +58,6 @@ public class MainActivity extends ActionBarActivity {
 		if (id == R.id.add_contact) {
 			Intent intent = new Intent(this, EditorActivity.class);
 			startActivity(intent);
-		} else if (id == R.id.exit){
-			System.exit(0);
 		}
 		return super.onOptionsItemSelected(item);
 	}

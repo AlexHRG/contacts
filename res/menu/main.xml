@@ -6,8 +6,5 @@
     <item android:id="@+id/add_contact"
           android:title="@string/add_contact"
           android:showAsAction="ifRoom" />
-    <item android:id="@+id/exit"
-          android:title="@string/exit"
-          android:showAsAction="ifRoom" />
 
 </menu>
