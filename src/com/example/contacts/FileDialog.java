@@ -80,28 +80,9 @@ public class FileDialog extends ListActivity {
 			}
 		});
 
-		final Button newButton = (Button) findViewById(R.id.fdButtonNew);
-		newButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				setCreateVisible(v);
-
-				mFileName.setText("");
-				mFileName.requestFocus();
-			}
-		});
-
 		selectionMode = getIntent().getIntExtra(SELECTION_MODE, SelectionMode.MODE_CREATE);
-
 		formatFilter = getIntent().getStringArrayExtra(FORMAT_FILTER);
-
 		canSelectDir = getIntent().getBooleanExtra(CAN_SELECT_DIR, false);
-
-		if (selectionMode == SelectionMode.MODE_OPEN) {
-			newButton.setEnabled(false);
-		}
-
 		layoutSelect = (LinearLayout) findViewById(R.id.fdLinearLayoutSelect);
 		layoutCreate = (LinearLayout) findViewById(R.id.fdLinearLayoutCreate);
 		layoutCreate.setVisibility(View.GONE);
