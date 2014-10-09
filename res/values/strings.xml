@@ -21,6 +21,7 @@
     <string name="exit">Exit</string>
     <string name="title_activity_contact">ContactActivity</string>
     <string name="title_activity_file_dialog">FileDialog</string>
+    <string name="to_main">To the main page</string>
     
     <string name="location">Location</string>
     <string name="cant_read_folder">folder can\'t be read!</string>

@@ -19,6 +19,7 @@
     <string name="edit">Правка</string>
     <string name="save">Сохранить</string>
     <string name="exit">Выход</string>
+    <string name="to_main">На главную</string>
     
     <string name="location">Расположение</string>
     <string name="cant_read_folder">папку невозможно открыть!</string>

@@ -78,6 +78,8 @@ public class EditorActivity extends ActionBarActivity implements
 			int birth_index = cursor.getColumnIndex(DB.COLUMN_BIRTH);
 			int social_index = cursor.getColumnIndex(DB.COLUMN_SN);
 			int image_path_index = cursor.getColumnIndex(DB.COLUMN_IMAGE_PATH);
+			
+			imagePath = cursor.getString(image_path_index);
 	
 			et_first_name.setText(cursor.getString(fn_index));
 			et_last_name.setText(cursor.getString(ln_index));
@@ -85,25 +87,9 @@ public class EditorActivity extends ActionBarActivity implements
 			et_email.setText(cursor.getString(email_index));
 			et_birthdate.setText(cursor.getString(birth_index));
 			et_social_network.setText(cursor.getString(social_index));
-			tv_image_path.setText(cursor.getString(image_path_index));
+			tv_image_path.setText(imagePath);
 		}
 	}
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		getMenuInflater().inflate(R.menu.editor, menu);
-//		return true;
-//
-//	}
-//
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
 
 	@Override
 	public void onClick(View v) {
@@ -114,7 +100,7 @@ public class EditorActivity extends ActionBarActivity implements
             //can user select directories or not
             intent.putExtra(FileDialog.CAN_SELECT_DIR, false);
             //alternatively you can set file filter
-            //intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "png" });
+            intent.putExtra(FileDialog.FORMAT_FILTER, new String[] { "png", "jpg", "jpeg" });
             startActivityForResult(intent, REQUEST_SAVE);
 			break;
 		case R.id.buttonSave:
@@ -128,7 +114,13 @@ public class EditorActivity extends ActionBarActivity implements
 					, imagePath
 					, 0
 					, row_id);
-			toMainActivity();
+			if (edit_mode){
+				Intent intent2 = new Intent(this, ContactActivity.class);
+				intent2.putExtra("row_id", row_id);
+				startActivity(intent2);
+			} else {
+				startActivity(new Intent(this, MainActivity.class));
+			}
 			break;
 		case R.id.buttonCancel:
 			finish();
@@ -154,11 +146,6 @@ public class EditorActivity extends ActionBarActivity implements
             }
 
     }
-	
-	private void toMainActivity() {
-		Intent intent = new Intent(this, MainActivity.class);
-		startActivity(intent);
-	}
 
 	protected void onDestroy() {
 		super.onDestroy();

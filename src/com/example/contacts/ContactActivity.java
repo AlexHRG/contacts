@@ -2,11 +2,14 @@ package com.example.contacts;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class ContactActivity extends ActionBarActivity {
@@ -19,6 +22,7 @@ public class ContactActivity extends ActionBarActivity {
 	private TextView email;
 	private TextView birthdate;
 	private TextView social;
+	private ImageView image_view;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class ContactActivity extends ActionBarActivity {
 		email = (TextView) findViewById(R.id.field_email);
 		birthdate = (TextView) findViewById(R.id.field_birthdate);
 		social = (TextView) findViewById(R.id.field_social);
+		image_view = (ImageView) findViewById(R.id.imageView1);
 		
 		readData();
 	}
@@ -50,6 +55,7 @@ public class ContactActivity extends ActionBarActivity {
 			int email_index = cursor.getColumnIndex(DB.COLUMN_EMAIL);
 			int birth_index = cursor.getColumnIndex(DB.COLUMN_BIRTH);
 			int social_index = cursor.getColumnIndex(DB.COLUMN_SN);
+			int image_path = cursor.getColumnIndex(DB.COLUMN_IMAGE_PATH);
 	
 			f_name.setText(cursor.getString(fn_index));
 			l_name.setText(cursor.getString(ln_index));
@@ -57,6 +63,9 @@ public class ContactActivity extends ActionBarActivity {
 			email.setText(cursor.getString(email_index));
 			birthdate.setText(cursor.getString(birth_index));
 			social.setText(cursor.getString(social_index));
+			
+			Bitmap image = BitmapFactory.decodeFile(cursor.getString(image_path));
+			image_view.setImageBitmap(image);
 		}
 	}
 
@@ -75,6 +84,8 @@ public class ContactActivity extends ActionBarActivity {
 			intent.putExtra("row_id", row_id);
 			
 			startActivity(intent);
+		} else if (id == R.id.action_to_main){
+			startActivity(new Intent(this, MainActivity.class));
 		}
 		return super.onOptionsItemSelected(item);
 	}

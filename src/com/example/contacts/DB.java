@@ -11,7 +11,7 @@ public class DB {
 
 	private static final String DB_NAME = "mydb";
 	private static final int DB_VERSION = 1;
-	private static final String DB_TABLE = "contacts";
+	private static final String TABLE_CONTACTS = "contacts";
 	public static final String COLUMN_ID = "_id";
 	public static final String COLUMN_FN = "firstName";
 	public static final String COLUMN_LN = "lastName";
@@ -22,7 +22,7 @@ public class DB {
 	public static final String COLUMN_IMAGE_PATH = "imagePath";
 	public static final String COLUMN_IMAGE_ID = "inageId";
 
-	private static final String DB_CREATE = "create table " + DB_TABLE + "("
+	private static final String DB_CREATE = "create table " + TABLE_CONTACTS + "("
 			+ COLUMN_ID + " integer primary key autoincrement, " + COLUMN_FN
 			+ " text not null, " + COLUMN_LN + " text not null, "
 			+ COLUMN_PHONE + " text, " + COLUMN_EMAIL + " text, "
@@ -49,7 +49,7 @@ public class DB {
 	}
 
 	public Cursor getAllData() {
-		return mDB.query(DB_TABLE, null, null, null, null, null, null);
+		return mDB.query(TABLE_CONTACTS, null, null, null, null, null, null);
 	}
 
 	public Cursor getLine(long row_id) {
@@ -69,14 +69,14 @@ public class DB {
 		cv.put(COLUMN_IMAGE_PATH, imagePath);
 		cv.put(COLUMN_IMAGE_ID, imageID);
 		if (update){
-			mDB.update(DB_TABLE, cv, "_id = ?",	new String[] { String.valueOf(row_id) });
+			mDB.update(TABLE_CONTACTS, cv, "_id = ?",	new String[] { String.valueOf(row_id) });
 		} else {
-			mDB.insert(DB_TABLE, null, cv);
+			mDB.insert(TABLE_CONTACTS, null, cv);
 		}
 	}
 
 	public void delRec(long id) {
-		mDB.delete(DB_TABLE, COLUMN_ID + " = " + id, null);
+		mDB.delete(TABLE_CONTACTS, COLUMN_ID + " = " + id, null);
 	}
 
 	private class DBHelper extends SQLiteOpenHelper {
