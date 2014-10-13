@@ -10,6 +10,7 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,7 +27,7 @@ public class FileDialog extends ListActivity {
 
 	private static final String ITEM_KEY = "key";
 	private static final String ITEM_IMAGE = "image";
-	private static final String ROOT = "/";
+	private static final String ROOT = Environment.getExternalStorageDirectory().toString();//"/";
 	public static final String START_PATH = "START_PATH";
 	public static final String FORMAT_FILTER = "FORMAT_FILTER";
 	public static final String RESULT_PATH = "RESULT_PATH";
