@@ -79,12 +79,17 @@ public class ContactActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 
 		int id = item.getItemId();
+		
 		if (id == R.id.action_edit) {
 			Intent intent = new Intent(this, EditorActivity.class);
-			intent.putExtra("row_id", row_id);
-			
+			intent.putExtra("row_id", row_id);	
 			startActivity(intent);
+			
 		} else if (id == R.id.action_to_main){
+			startActivity(new Intent(this, MainActivity.class));
+			
+		} else if (id == R.id.action_delete){
+			db.delRec(row_id);
 			startActivity(new Intent(this, MainActivity.class));
 		}
 		return super.onOptionsItemSelected(item);
