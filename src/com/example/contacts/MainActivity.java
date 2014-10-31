@@ -1,7 +1,5 @@
 package com.example.contacts;
 
-import java.util.Map;
-
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -16,6 +14,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+
 
 public class MainActivity extends ActionBarActivity {
 	private ListView listView;
@@ -35,10 +34,9 @@ public class MainActivity extends ActionBarActivity {
 		db.open();
 
 		listView = (ListView) findViewById(android.R.id.list);
-
+		
 		cursor = db.getAllData();
-		startManagingCursor(cursor);
-
+//		startManagingCursor(cursor);
 		String[] from = new String[] { DB.COLUMN_FN, DB.COLUMN_LN };
 		int[] to = new int[] { R.id.listFN, R.id.listLN };
 		scAdapter = new SimpleCursorAdapter(this, R.layout.list, cursor, from,

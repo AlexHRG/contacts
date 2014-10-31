@@ -22,9 +22,9 @@ public class DB {
 	public static final String COLUMN_IMAGE_PATH = "imagePath";
 	public static final String COLUMN_IMAGE_ID = "inageId";
 
-	private static final String DB_CREATE = "create table " + TABLE_CONTACTS + "("
-			+ COLUMN_ID + " integer primary key autoincrement, " + COLUMN_FN
-			+ " text not null, " + COLUMN_LN + " text not null, "
+	private static final String DB_CREATE = "create table " + TABLE_CONTACTS
+			+ "(" + COLUMN_ID + " integer primary key autoincrement, "
+			+ COLUMN_FN + " text not null, " + COLUMN_LN + " text not null, "
 			+ COLUMN_PHONE + " text, " + COLUMN_EMAIL + " text, "
 			+ COLUMN_BIRTH + " text, " + COLUMN_SN + " text, "
 			+ COLUMN_IMAGE_PATH + " text, " + COLUMN_IMAGE_ID + " integer);";
@@ -57,8 +57,9 @@ public class DB {
 				new String[] { String.valueOf(row_id) });
 	}
 
-	public void addOrUpd(Boolean update, String fn, String ln, String phone, String email,
-			String birthdate, String social, String imagePath, long imageID, long row_id) {
+	public void addOrUpd(Boolean update, String fn, String ln, String phone,
+			String email, String birthdate, String social, String imagePath,
+			long imageID, long row_id) {
 		ContentValues cv = new ContentValues();
 		cv.put(COLUMN_FN, fn);
 		cv.put(COLUMN_LN, ln);
@@ -68,8 +69,9 @@ public class DB {
 		cv.put(COLUMN_SN, social);
 		cv.put(COLUMN_IMAGE_PATH, imagePath);
 		cv.put(COLUMN_IMAGE_ID, imageID);
-		if (update){
-			mDB.update(TABLE_CONTACTS, cv, "_id = ?",	new String[] { String.valueOf(row_id) });
+		if (update) {
+			mDB.update(TABLE_CONTACTS, cv, "_id = ?",
+					new String[] { String.valueOf(row_id) });
 		} else {
 			mDB.insert(TABLE_CONTACTS, null, cv);
 		}
@@ -77,6 +79,12 @@ public class DB {
 
 	public void delRec(long id) {
 		mDB.delete(TABLE_CONTACTS, COLUMN_ID + " = " + id, null);
+	}
+
+	public Cursor findRec(String query) {
+		return mDB.query(true, TABLE_CONTACTS, new String[] { COLUMN_FN,
+				COLUMN_LN }, COLUMN_FN + " LIKE" + "'%" + query + "%'", null,
+				null, null, null, null);
 	}
 
 	private class DBHelper extends SQLiteOpenHelper {
