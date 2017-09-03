@@ -109,4 +109,9 @@ public class MainActivity extends ActionBarActivity {
 		super.onDestroy();
 		db.close();
 	}
+
+/*
+Changes just for example for a new branch.
+*/
+
 }
