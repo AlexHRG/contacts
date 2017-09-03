@@ -110,8 +110,4 @@ public class MainActivity extends ActionBarActivity {
 		db.close();
 	}
 
-/*
-Changes just for example for a new branch.
-*/
-
 }
